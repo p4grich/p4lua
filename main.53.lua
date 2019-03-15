@@ -1,5 +1,5 @@
-sysInfo = require("sysInfo")
+sysInfo = require("sysinfo")
 
-print(sysInfo.os())
-print(sysInfo.arch())
-print(sysInfo.kernel())
+print(sysinfo.os())
+print(sysinfo.arch())
+print(sysinfo.kernel())
