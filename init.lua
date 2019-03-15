@@ -1,7 +1,17 @@
-sysInfo = {}
+--
+-- User: p4grich
+-- Date: 2019-03-13
+-- Time: 16:50
+--
+local sysinfo = {}
+local platform = " "
+local os_name = " "
+local arch_name = " "
+local kern_ver = " "
 
-function sysInfo.plat()
-  directory_separator = package.config:sub(1,1)
+
+function sysinfo.plat()
+  local directory_separator = package.config:sub(1,1)
   if directory_separator == "/" then
     platform = "unix"
   end
@@ -11,8 +21,8 @@ function sysInfo.plat()
   return platform
 end
 
-function sysInfo.os()
-  sysInfo.plat()
+function sysinfo.os()
+  sysinfo.plat()
   if platform == "unix" then
     os_name = io.popen('uname -s','r'):read('*l')
   end
@@ -22,8 +32,8 @@ function sysInfo.os()
   return os_name
 end
 
-function sysInfo.arch()
-  sysInfo.plat()
+function sysinfo.arch()
+  sysinfo.plat()
   if platform == "unix" then
     arch_name = io.popen('uname -m','r'):read('*l')
   end
@@ -33,16 +43,16 @@ function sysInfo.arch()
   return arch_name
 end
 
-function sysInfo.kernel()
-  sysInfo.plat()
+function sysinfo.kernel()
+  sysinfo.plat()
   if platform == "unix" then
     kern_ver = io.popen('uname -r','r'):read('*l')
   end
   if platform == "windows" then
-    ver = io.popen('ver','r'):read('*a')
+    local ver = io.popen('ver','r'):read('*a')
     kern_ver = string.match(ver, "%d+[.]%d+[.]%d+")
   end
-  return kern_ver
+    return kern_ver
 end
 
-return sysInfo
+return sysinfo
